@@ -6,7 +6,8 @@ CREATE TABLE Airport (
   IATA CHAR(3),
   ICAO CHAR(4),
   TimeZone CHAR(100),
-  PRIMARY KEY (CityID) REFERENCES City,
+  PRIMARY KEY (AirportID),
+  FOREIGN KEY (CityID) REFERENCES City,
   FOREIGN KEY (CountryID) REFERENCES Country
 );
 
@@ -30,7 +31,7 @@ IATA CHAR(2),
 ICAO CHAR(2),
 CountryId INT,
 Active CHAR(1),
-PRIMARY KEY (ID),
+PRIMARY KEY (AirlineID),
 FOREIGN KEY (CountryId) REFERENCES Country
 );
 
@@ -60,10 +61,8 @@ CREATE TABLE Performance(
   AirlineID INT NOT NULL,
   OriginAirportID INT NOT NULL,
   DestAirportID INT NOT NULL,
-  ScheduledDepartureTime CHAR(50),
-  ActualDepartureTime CHAR(50),
-  ScheduledArrivalTime CHAR(50),
-  ActualArrivalTime CHAR(50),
+  DepartureDelay INT,
+  ArrivalDelay INT,
   IsCancelled CHAR(1),
   PRIMARY KEY (FlightDate, OriginAirportID, DestAirportID, FlightNumber),
   FOREIGN KEY (OriginAirportID) REFERENCES Airport,

@@ -1,0 +1,331 @@
+ID,Airline,Date,FlightNum
+0,Comair,1997-01-09,3272
+1,Stavropolskaya Aktsionernaya Avia,1997-03-18,1023
+2,Merpati Nusantara Airlines,1997-04-19,106
+3,China Southern Airlines,1997-05-08,3456
+4,FedEx Express,1997-07-31,14
+5,Sempati Air,1997-07-17,304
+6,Korean Air,1997-08-06,801
+7,Formosa Airlines,1997-08-10,7601
+8,Vietnam Airlines,1997-09-03,815
+9,Royal Brunei Airlines,1997-09-06,238
+10,Garuda Indonesia,1997-09-26,152
+11,Austral Líneas Aéreas,1997-10-10,2553
+12,Tajikistan Airlines,1997-12-15,3183
+13,Aerosvit,1997-12-17,241
+14,SilkAir,1997-12-19,185
+15,United Airlines,1997-12-28,826
+16,Cebu Pacific,1998-02-02,387
+17,China Airlines,1998-02-16,676
+18,Philippine Airlines,1998-03-22,137
+19,Air France,1998-04-20,422
+20,PIA,1998-05-25,544
+21,Propair,1998-06-18,420
+22,Proteus Airlines,1998-07-30,706
+23,Myanma Airways,1998-08-24,635
+24,Cubana de Aviación,1998-08-29,389
+25,Swissair,1998-09-02,111
+26,PauknAir,1998-09-25,4101
+27,Lionair,1998-09-29,602
+28,Thai Airways International,1998-12-11,261
+29,China Southwest Airlines,1999-02-24,4509
+30,Turkish Airlines,1999-04-07,5904
+31,Korean Air Cargo,1999-04-15,6316
+32,American Airlines,1999-06-01,1420
+33,Air Fiji,1999-07-24,121
+34,All Nippon Airways,1999-07-24,61
+35,TACV,1999-08-07,5002
+36,China Airlines,1999-08-22,642
+37,LAPA,1999-08-31,3142
+38,Necon Air,1999-09-05,128
+39,Britannia Airways,1999-09-14,226
+40,Qantas,1999-09-23,1
+41,EgyptAir,1999-10-31,990
+42,TAESA,1999-11-09,725
+43,Si Fly,1999-11-12,3275
+44,Asian Spirit,1999-12-07,100
+45,SATA Air Açores,1999-12-11,530
+46,Cubana de Aviación,1999-12-21,1216
+47,Korean Air Cargo,1999-12-22,8509
+48,Indian Airlines,1999-12-24,814
+49,Cubana de Aviación,1999-12-25,310
+50,Crossair,2000-01-10,498
+51,Kenya Airways,2000-01-30,431
+52,Alaska Airlines,2000-01-31,261
+53,Emery Worldwide,2000-02-16,17
+54,Southwest Airlines,2000-03-05,1455
+55,Air Philippines,2000-04-19,541
+56,Wuhan Airlines,2000-06-22,343
+57,Malév,2000-07-04,262
+58,Aerocaribe,2000-07-08,7831
+59,Hapag-Lloyd,2000-07-12,3378
+60,Alliance Air,2000-07-17,7412
+61,Air France,2000-07-25,4590
+62,Gulf Air,2000-08-23,72
+63,Singapore Airlines,2000-10-31,6
+64,Dirgantara Air Service,2000-11-18,3130
+65,British Airways,2000-12-20,2069
+66,Yemenia,2001-01-23,448
+67,RUTACA Airlines,2001-01-25,225
+68,Japan Airlines,2001-01-31,907
+69,Loganair,2001-02-27,670
+70,Thai Airways International,2001-03-03,114
+71,Air Caraïbes,2001-03-24,1501
+72,Vladivostok Air,2001-07-04,352
+73,Air Transat,2001-08-24,236
+74,Binter Mediterráneo,2001-08-29,8261
+75,American Airlines,2001-09-11,11
+76,United Airlines,2001-09-11,175
+77,American Airlines,2001-09-11,77
+78,United Airlines,2001-09-11,93
+83,Siberia Airlines,2001-10-04,1812
+84,"Linate Airport disaster, Scandinavian Airlines",2001-10-08,686
+85,American Airlines,2001-11-12,587
+86,Crossair,2001-11-24,3597
+87,American Airlines,2001-12-22,63
+88,Lion Air,2002-01-14,386
+89,Garuda Indonesia,2002-01-16,421
+90,TAME,2002-01-28,120
+91,Iran Air Tours,2002-02-12,956
+92,Air China,2002-04-15,129
+93,EAS Airlines,2002-05-04,4226
+94,EgyptAir,2002-05-07,843
+95,China Northern Airlines,2002-05-07,6136
+96,China Airlines,2002-05-25,611
+97,Bashkirian Airlines,2002-07-01,2937
+98,Swiss International Airlines,2002-07-10,850
+99,Rico Linhas Aéreas,2002-08-30,4823
+100,Northwest Airlines,2002-10-09,85
+101,Luxair,2002-11-06,9642
+102,Laoag International Airlines,2002-11-11,585
+103,Aeromist-Kharkiv,2002-12-23,2137
+104,Air Midwest,2003-01-08,5481
+105,Turkish Airlines,2003-01-08,634
+106,TANS Perú,2003-01-09,222
+107,Air Algérie,2003-03-06,6289
+108,UM Airlines,2003-05-26,4230
+109,Qantas,2003-05-29,1737
+110,Sudan Airways,2003-07-08,139
+111,Colgan Air,2003-08-26,9446
+112,FedEx Express,2003-12-18,647
+113,UTAGE,2003-12-25,141
+114,Flash Airlines,2004-01-03,604
+115,Uzbekistan Airways,2004-01-13,1154
+116,Kish Air,2004-02-10,7170
+117,Rico Linhas Aéreas,2004-05-14,4815
+118,Gabon Express,2004-06-08,221
+119,Air Tahoma,2004-08-13,185
+120,Siberia Airlines,2004-08-24,1047
+121,Volga-AviaExpress,2004-08-24,1303
+124,MK Airlines,2004-10-14,1602
+125,Pinnacle Airlines,2004-10-14,3701
+126,Corporate Airlines,2004-10-19,5966
+127,China Eastern Airlines,2004-11-21,5210
+128,Lion Air,2004-11-30,538
+129,Kam Air,2005-02-03,904
+130,British Airways,2005-02-20,268
+131,Air Transat,2005-03-06,961
+132,Regional Airlines,2005-03-16,9288
+133,US Airways,2005-06-09,1170
+134,Air France,2005-08-02,358
+135,Tuninter,2005-08-06,1153
+136,Copterline,2005-08-10,103
+137,Helios Airways,2005-08-14,522
+138,West Caribbean Airways,2005-08-16,708
+139,TANS Perú,2005-08-23,204
+140,Mandala Airlines,2005-09-05,91
+141,JetBlue Airways,2005-09-21,292
+142,Bellview Airlines,2005-10-22,210
+143,Southwest Airlines,2005-12-08,1248
+144,Sosoliso Airlines,2005-12-10,1145
+145,Chalk's Ocean Airways,2005-12-19,101
+146,Azerbaijan Airlines,2005-12-23,217
+147,TEAM Linhas Aéreas,2006-03-31,6865
+148,Armavia,2006-05-03,967
+149,S7 Airlines,2006-07-09,778
+150,PIA,2006-07-10,688
+151,FedEx,2006-07-28,630
+152,Air Algérie,2006-08-13,2208
+153,Pulkovo Aviation Enterprise,2006-08-22,612
+154,Comair,2006-08-27,5191
+155,Iran Air Tours,2006-09-01,945
+156,Gol Transportes Aéreos,2006-09-29,1907
+157,Turkish Airlines,2006-10-03,1476
+158,Atlantic Airways,2006-10-10,670
+159,Continental Airlines,2006-10-28,1883
+160,ADC Airlines,2006-10-29,53
+161,Adam Air,2007-01-01,574
+162,Air West,2007-01-24,612
+163,Adam Air,2007-02-21,172
+164,Garuda Indonesia,2007-03-07,200
+165,UTair,2007-03-17,471
+166,Kenya Airways,2007-05-05,507
+167,PMTair,2007-06-25,241
+168,TAM Airlines,2007-07-17,3054
+169,Air Moorea,2007-08-09,1121
+170,China Airlines,2007-08-20,120
+171,Scandinavian Airlines,2007-09-09,1209
+172,Scandinavian Airlines,2007-09-12,2748
+173,Scandinavian Airlines,2007-10-27,2867
+177,One-Two-GO Airlines,2007-09-16,269
+178,Atlasjet,2007-11-30,4203
+179,TAROM,2007-12-30,3107
+180,British Airways,2008-01-17,38
+181,Eagle Airways,2008-02-08,2279
+182,Belavia,2008-02-14,1834
+183,Santa Bárbara Airlines,2008-02-21,518
+184,Hewa Bora Airways,2008-04-15,122
+185,TACA,2008-05-30,390
+186,Sudan Airways,2008-06-10,109
+187,Centurion Air Cargo,2008-07-07,164
+188,Qantas,2008-07-25,30
+189,Spanair,2008-08-20,5022
+190,Iran Aseman Airlines,2008-08-24,6895
+191,Sriwijaya Air,2008-08-27,62
+192,Aeroflot,2008-09-14,821
+193,Qantas,2008-10-07,72
+194,Yeti Airlines,2008-10-08,103
+195,Ryanair,2008-11-10,4102
+196,XL Airways Germany,2008-11-27,888
+197,Continental Airlines,2008-12-20,1404
+198,US Airways,2009-01-15,1549
+199,Colgan Air,2009-02-12,3407
+200,Turkish Airlines,2009-02-25,1951
+201,Cougar Helicopters,2009-03-12,91
+202,Emirates,2009-03-20,407
+203,FedEx Express,2009-03-23,80
+204,Bond Offshore Helicopters,2009-04-01,85
+205,CanJet,2009-04-19,918
+206,Air France,2009-06-01,447
+207,Yemenia,2009-06-30,626
+208,Southwest Airlines,2009-07-13,2294
+209,Caspian Airlines,2009-07-15,7908
+210,Aria Air,2009-07-24,1525
+211,Merpati Nusantara Airlines,2009-08-02,9760
+212,Bangkok Airways,2009-08-04,266
+213,Airlines PNG,2009-08-11,4684
+214,Aeroméxico,2009-09-09,576
+215,Airlink,2009-09-24,8911
+216,Azza Transport,2009-10-21,2241
+217,Divi Divi Air,2009-10-22,14
+218,RwandAir,2009-11-12,205
+219,Avient Aviation,2009-11-28,324
+220,American Airlines,2009-12-22,331
+221,Northwest Airlines,2009-12-25,253
+222,Taban Air,2010-01-24,6437
+223,Ethiopian Airlines,2010-01-25,409
+224,Aviastar-TU,2010-03-22,1906
+225,AeroUnion,2010-04-13,302
+226,Merpati Nusantara Airlines,2010-04-13,836
+227,Cathay Pacific,2010-04-13,780
+228,Afriqiyah Airways,2010-05-12,771
+229,Pamir Airways,2010-05-17,112
+230,Air India Express,2010-05-22,812
+231,Lufthansa Cargo,2010-07-27,8460
+232,Airblue,2010-07-28,202
+233,Katekavia,2010-08-03,9357
+234,AIRES,2010-08-16,8250
+235,Agni Air,2010-08-24,101
+236,Henan Airlines,2010-08-24,8387
+237,UPS Airlines,2010-09-03,6
+238,Alrosa Mirny Air Enterprise,2010-09-07,514
+239,Conviasa,2010-09-13,2350
+240,Aero Caribbean,2010-11-04,883
+241,Qantas,2010-11-04,32
+242,Sun Way,2010-11-28,4412
+243,Dagestan Airlines,2010-12-04,372
+244,Kolavia,2011-01-01,348
+245,Iran Air,2011-01-09,277
+246,Manx2,2011-02-10,7100
+247,Central American Airways,2011-02-14,731
+248,Southwest Airlines,2011-04-01,812
+249,Merpati Nusantara Airlines,2011-05-07,8968
+250,Sol Líneas Aéreas,2011-05-18,5428
+251,RusAir,2011-06-20,9605
+252,Hewa Bora Airways,2011-07-08,952
+253,Angara Airlines,2011-07-11,5007
+254,Noar Linhas Aéreas,2011-07-13,4896
+255,Asiana Airlines,2011-07-28,991
+256,EgyptAir,2011-07-29,667
+257,Caribbean Airlines,2011-07-30,523
+258,First Air,2011-08-20,6560
+259,Aerocon,2011-09-06,238
+260,Yak-Service,2011-09-07,9634
+261,Buddha Air,2011-09-25,103
+262,Nusantara Buana Air,2011-09-29,823
+263,Airlines PNG,2011-10-13,1600
+264,Iran Air,2011-10-18,742
+265,LOT Polish Airlines,2011-11-01,16
+266,UTair,2012-04-02,120
+267,Bhoja Air,2012-04-20,213
+268,Agni Air,2012-05-14,
+269,Allied Air,2012-06-02,111
+270,Dana Air,2012-06-03,992
+271,Tianjin Airlines,2012-06-29,7554
+272,Petropavlovsk-Kamchatsky Air,2012-09-12,251
+273,Sita Air,2012-09-28,601
+274,FlyMontserrat,2012-10-07,107
+275,Air Bagan,2012-12-25,11
+276,Red Wings Airlines,2012-12-29,9268
+277,SCAT Airlines,2013-01-29,760
+278,South Airlines,2013-02-13,8971
+279,ACE Air Cargo,2013-03-08,51
+280,Lion Air,2013-04-13,904
+281,National Airlines,2013-04-29,102
+282,Nepal Airlines,2013-05-16,555
+283,Merpati Nusantara Airlines,2013-06-10,6517
+284,Asiana Airlines,2013-07-06,214
+285,UPS Airlines,2013-08-14,1354
+286,Associated Aviation,2013-10-03,361
+287,Lao Airlines,2013-10-16,301
+288,Tatarstan Airlines,2013-11-17,363
+289,LAM Mozambique Airlines,2013-11-29,470
+290,Nepal Airlines,2014-02-16,183
+291,Ethiopian Airlines,2014-02-17,702
+292,Malaysia Airlines,2014-03-08,370
+293,Malaysia Airlines,2014-07-17,17
+294,TransAsia Airways,2014-07-23,222
+295,Air Algérie,2014-07-24,5017
+296,Sepahan Airlines,2014-08-10,5915
+297,Skyway Enterprises,2014-10-29,7101
+298,Indonesia AirAsia,2014-12-28,8501
+299,TransAsia Airways,2015-02-04,235
+300,Delta Air Lines,2015-03-05,1086
+301,Germanwings,2015-03-24,9525
+302,Air Canada,2015-03-29,624
+303,Carson Air,2015-04-13,66
+304,Asiana Airlines,2015-04-14,162
+305,Turkish Airlines,2015-04-25,1878
+306,Trigana Air Service,2015-08-16,267
+307,Ceiba Intercontinental Airlines,2015-09-05,71
+308,British Airways,2015-09-08,2276
+309,Aviastar,2015-10-02,7503
+310,Dynamic Airways,2015-10-29,405
+311,Metrojet,2015-10-31,9268
+312,West Air Sweden,2016-01-08,294
+313,Daallo Airlines,2016-02-02,159
+314,Tara Air,2016-02-24,193
+315,Flydubai,2016-03-19,981
+316,EgyptAir,2016-03-29,181
+317,Batik Air,2016-04-04,7703
+318,EgyptAir,2016-05-19,804
+319,Korean Air,2016-05-27,2708
+320,Singapore Airlines,2016-06-27,368
+321,Emirates,2016-08-03,521
+322,ASL Airlines Hungary,2016-08-05,7332
+323,Southwest Airlines,2016-08-27,3472
+324,American Airlines,2016-10-28,383
+325,FedEx Express,2016-10-28,910
+326,LaMia Airlines,2016-11-28,2933
+327,Pakistan International Airlines,2016-12-07,661
+328,Aerosucre,2016-12-20,4544
+329,Afriqiyah Airways,2016-12-23,209
+330,Turkish Airlines,2017-01-16,6491
+331,Peruvian Airlines,2017-03-28,112
+332,Summit Air,2017-05-27,409
+333,Air Canada,2017-07-07,759
+334,Air France,2017-09-30,66
+335,West Wind Aviation,2017-12-13,280
+336,Nature Air,2017-12-31,9916
+337,Pegasus Airlines,2018-01-13,8622
+338,Saratov Airlines,2018-02-11,703

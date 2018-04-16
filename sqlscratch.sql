@@ -49,4 +49,49 @@ join country on country.country = airlines.airline_country
 set airlines.airline_country_id = country.id;
 
 
+CREATE TABLE country AS (select distinct trim(airport_country) as country from airports where airport_country is not null and airport_country <> '' ) Union (select distinct trim(airline_country) as country from airlines where airline_country is not null and airline_country <> '' ) order by country;
+Alter table country add column id integer auto_increment primary key;
+
+create table city as select distinct trim(both '"' from city) as city from airports where city is not null and city <> '' order by city;
+select * from city;
+Alter table city add column id integer auto_increment primary key;
+UPDATE airports SET city = TRIM(BOTH '"' FROM city);
+
+alter table PerformanceRaw
+ add column origin_id int;
+alter table PerformanceRaw
+ add foreign key fk_origin_id(origin_id) references airports(airport_id);
+  
+alter table PerformanceRaw
+ add column dest_id int;
+alter table PerformanceRaw
+ add foreign key fk_dest_id(dest_id) references airports(airport_id);
+  
+update PerformanceRaw
+left join airports on PerformanceRaw.ORIGIN = airports.airport_iata
+set PerformanceRaw.origin_id = airports.airport_id;
+
+update PerformanceRaw
+left join airports on PerformanceRaw.DEST = airports.airport_iata
+set PerformanceRaw.dest_id = airports.airport_id;
+update PerformanceRaw p join
+(
+select r.ORIGIN,  a.airport_id
+from PerformanceRaw r left join airports a
+on r.ORIGIN = a.airport_iata
+order by r.ORIGIN
+limit 1000
+) s
+on p.ORIGIN = s.ORIGIN
+set p.origin_id = s.airport_id;
+
+
+alter table PerformanceRaw
+ add column airline_id int;
+alter table PerformanceRaw
+ add foreign key fk_airline_id(airline_id) references airlines(airline_id);
+ 
+update PerformanceRaw
+left join airlines on PerformanceRaw.CARRIER = airlines.airline_id
+set PerformanceRaw.airline_id = airlines.airline_id;
 

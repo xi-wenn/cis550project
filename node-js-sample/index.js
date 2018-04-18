@@ -26,6 +26,9 @@ app.use(express.static(__dirname + '/public'))
 var bodyParser = require('body-parser')
 var jsonParser = bodyParser.json()
 
+app.get('/index', function(request, response) {
+  response.sendFile(path.join(__dirname, '/', 'index.html'));
+})
 
 app.get('/bikes', function(request, response) {
   response.sendFile(path.join(__dirname, '/', 'bikes.html'));

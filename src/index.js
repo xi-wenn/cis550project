@@ -3,21 +3,21 @@ var path = require('path')
 var app = express()
 
 
-var mysql      = require('mysql');
+var mysql = require('mysql');
 var connection = mysql.createConnection({
-  host     : 'mysql550project.cl1yl0dhh5zw.us-east-1.rds.amazonaws.com',
-  user     : 'liuliuliu',
-  password : 'sixsixsix',
-  database : 'myFlights'
+    host: 'mysql550project.cl1yl0dhh5zw.us-east-1.rds.amazonaws.com',
+    user: 'liuliuliu',
+    password: 'sixsixsix',
+    database: 'myFlights'
 });
 
 connection.connect(function(err) {
-  if (err) {
-    console.error('error connecting: ' + err.stack);
-    return;
-  }
+    if (err) {
+        console.error('error connecting: ' + err.stack);
+        return;
+    }
 
-  console.log('connected as id ' + connection.threadId);
+    console.log('connected as id ' + connection.threadId);
 });
 
 app.set('port', (process.env.PORT || 5000))
@@ -27,22 +27,26 @@ var bodyParser = require('body-parser')
 var jsonParser = bodyParser.json()
 
 app.get('/index', function(request, response) {
-  response.sendFile(path.join(__dirname, '/', 'index.html'));
+    response.sendFile(path.join(__dirname, '/', 'index.html'));
 })
 
 app.get('/search', function(request, response) {
-  response.sendFile(path.join(__dirname, '/', 'search.html'));
+    response.sendFile(path.join(__dirname, '/', 'search.html'));
+})
+
+app.get('/login', function(request, response) {
+    response.sendFile(path.join(__dirname, '/', 'login.html'));
 })
 
 app.get('/airlineData', function(request, response) {
-  // console.log("get airline data");
-  queryStr = 'select airline_id, airline_name, airline_iata from airlines;';
-  connection.query(queryStr, function (error, results, fields) {
-    if (error) throw error;
-    response.json(JSON.stringify(results));
-    // console.log("results");
-    // console.log(results);
-  })
+    // console.log("get airline data");
+    queryStr = 'select airline_id, airline_name, airline_iata from airlines;';
+    connection.query(queryStr, function(error, results, fields) {
+        if (error) throw error;
+        response.json(JSON.stringify(results));
+        // console.log("results");
+        // console.log(results);
+    })
 })
 
 
@@ -83,9 +87,9 @@ app.get('/airlineData', function(request, response) {
 // })
 
 app.get('/script.js', function(request, response) {
-  response.sendFile(path.join(__dirname, '/', 'script.js'));
+    response.sendFile(path.join(__dirname, '/', 'script.js'));
 })
 
 app.listen(app.get('port'), function() {
-  console.log('Node app is running at localhost:' + app.get('port'))
+    console.log('Node app is running at localhost:' + app.get('port'))
 })

@@ -5,10 +5,10 @@ var app = express()
 
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
-  host     : 'fling.seas.upenn.edu',
-  user     : '',
-  password : '',
-  database : ''
+  host     : 'mysql550project.cl1yl0dhh5zw.us-east-1.rds.amazonaws.com',
+  user     : 'liuliuliu',
+  password : 'sixsixsix',
+  database : 'myFlights'
 });
 
 connection.connect(function(err) {
@@ -30,41 +30,57 @@ app.get('/index', function(request, response) {
   response.sendFile(path.join(__dirname, '/', 'index.html'));
 })
 
-app.get('/bikes', function(request, response) {
-  response.sendFile(path.join(__dirname, '/', 'bikes.html'));
+app.get('/search', function(request, response) {
+  response.sendFile(path.join(__dirname, '/', 'search.html'));
 })
 
-app.get('/friendships', function(request, response) {
-  response.sendFile(path.join(__dirname, '/', 'friendships.html'));
-})
-
-app.get('/friendshipdata', function(req, res) {
-  queryStr = 'select p.name as name, IFNULL(fc.friendCount, 0) as friendCount' +
-           ' from Person p' +
-           ' left join (' +
-           '  select login, count(friend) as friendCount ' +
-           '  from Friends ' +
-           '  group by login' +
-           ' ) fc on p.login = fc.login;';
+app.get('/airlineData', function(request, response) {
+  // console.log("get airline data");
+  queryStr = 'select airline_id, airline_name, airline_iata from airlines;';
   connection.query(queryStr, function (error, results, fields) {
     if (error) throw error;
-    res.json(JSON.stringify(results))
+    response.json(JSON.stringify(results));
+    // console.log("results");
+    // console.log(results);
   })
 })
 
-app.post('/familydata', jsonParser, function(req, res) {
-  reqName = req.body.data;
-  console.log(req.body.data);
-  queryStr = 'select p2.login, p2.name, f.role, p2.sex, p2.relationshipStatus, p2.birthyear' +
-            ' from Person p' +
-            ' inner join Family f on f.login = p.login' +
-            ' left join Person p2 on f.member = p2.login' +
-            ' where p.name = "' + reqName + '"';
-  connection.query(queryStr, function (error, results, fields) {
-    if (error) throw error;
-    res.json(JSON.stringify(results))
-  })
-})
+
+// app.get('/bikes', function(request, response) {
+//   response.sendFile(path.join(__dirname, '/', 'bikes.html'));
+// })
+
+// app.get('/friendships', function(request, response) {
+//   response.sendFile(path.join(__dirname, '/', 'friendships.html'));
+// })
+
+// app.get('/friendshipdata', function(req, res) {
+//   queryStr = 'select p.name as name, IFNULL(fc.friendCount, 0) as friendCount' +
+//            ' from Person p' +
+//            ' left join (' +
+//            '  select login, count(friend) as friendCount ' +
+//            '  from Friends ' +
+//            '  group by login' +
+//            ' ) fc on p.login = fc.login;';
+//   connection.query(queryStr, function (error, results, fields) {
+//     if (error) throw error;
+//     res.json(JSON.stringify(results))
+//   })
+// })
+
+// app.post('/familydata', jsonParser, function(req, res) {
+//   reqName = req.body.data;
+//   console.log(req.body.data);
+//   queryStr = 'select p2.login, p2.name, f.role, p2.sex, p2.relationshipStatus, p2.birthyear' +
+//             ' from Person p' +
+//             ' inner join Family f on f.login = p.login' +
+//             ' left join Person p2 on f.member = p2.login' +
+//             ' where p.name = "' + reqName + '"';
+//   connection.query(queryStr, function (error, results, fields) {
+//     if (error) throw error;
+//     res.json(JSON.stringify(results))
+//   })
+// })
 
 app.get('/script.js', function(request, response) {
   response.sendFile(path.join(__dirname, '/', 'script.js'));

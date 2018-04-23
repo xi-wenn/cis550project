@@ -20,6 +20,37 @@ connection.connect(function(err) {
     console.log('connected as id ' + connection.threadId);
 });
 
+//-------------mongodb---------------
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://liuliuliu:sixsixsix@54.147.46.161:27017/cool_db', function (err, db) {
+    if (err) {
+        throw err;
+    } else {
+        console.log("successfully connected to the database");
+    }
+    //db.close();
+});
+
+//-------------connection test--------------
+/* // Create a schema
+var TodoSchema = new mongoose.Schema({
+  name: String,
+  completed: Boolean,
+  note: String,
+  updated_at: { type: Date, default: Date.now },
+});
+// Create a model based on the schema
+var Todo = mongoose.model('Todo', TodoSchema);
+// Create a todo in memory
+var todo = new Todo({name: 'Master NodeJS', completed: false, note: 'Getting there...'});
+// Save it to database
+todo.save(function(err){
+  if(err)
+    console.log(err);
+  else
+    console.log(todo);
+}); */
+//---------mongodb---------------
 app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
 

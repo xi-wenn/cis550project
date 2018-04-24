@@ -133,7 +133,7 @@ app.get('/airlines', function(request, response) {
 app.get('/airlineData', function(request, response) {
     // console.log("get airline data");
     queryStr = 'select airline_id, airline_name, airline_iata from airlines where airline_iata is not null and airline_iata <> "";';
-    connection.query(queryStr, function(error, results, fields) {
+    sql_connection.query(queryStr, function(error, results, fields) {
         if (error) throw error;
         response.json(JSON.stringify(results));
     })

@@ -26,7 +26,7 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 
 // required for passport
 app.use(session({
-    secret: 'ilovescotchscotchyscotchscotch', // session secret
+    secret: 'secret', // session secret
     resave: true,
     saveUninitialized: true
 }));
@@ -67,9 +67,17 @@ sql_connection.connect(function(err) {
 // });
 
 
+// var User = mongoose.model('User', userSchema);
+// User.find({
+//     "local.email": "test1@gmail.com"
+// }).exec(function(err, books) {
+//     if (err) throw err;
+
+//     console.log("user is " + books);
+// });
 
 //-------------connection test--------------
-// Create a schema
+// // Create a schema
 // var TodoSchema = new mongoose.Schema({
 //     name: String,
 //     completed: Boolean,
@@ -119,6 +127,9 @@ app.get('/airlineData', function(request, response) {
         // console.log("results");
         // console.log(results);
     })
+
+
+
 })
 
 

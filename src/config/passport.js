@@ -58,8 +58,12 @@ module.exports = function(passport) {
                         return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
 
                     // all is well, return user
-                    else
+                    else {
+                        req.session.email = user.local.email;
+                        console.log("email is " + req.session.email);
                         return done(null, user);
+                    }
+
                 });
             });
 
@@ -132,6 +136,8 @@ module.exports = function(passport) {
                     });
                 } else {
                     // user is logged in and already has a local account. Ignore signup. (You should log out before trying to create a new account, user!)
+                    req.session.email = user.local.email;
+                    console.log("email is " + req.session.email);
                     return done(null, req.user);
                 }
 

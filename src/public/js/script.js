@@ -70,24 +70,15 @@ airlineApp.controller('airlineController', function($scope, $http) {
     });
 });
 
-
-var airportApp = angular.module('Airports', []);
-airportApp.controller('airportController', function($scope, $http) {
-<<<<<<< HEAD
+var historyApp = angular.module('History', []);
+historyApp.controller('historyController', function($scope, $http) {
     console.log("js loaded");
-    var request = $http.get("/airportData");
+    var request = $http.get("/historyData");
     request.success(function(data) {
-        $scope.airportData = JSON.parse(data);
+        $scope.historyData = data;
         console.log(data)
     });
+    request.error(function(data) {
+        console.log('Error pulling history data.');
+    });
 });
-=======
-  console.log("js loaded");
-  var request = $http.get("/airportData");
-  request.success(function(data) {
-      $scope.airportData = JSON.parse(data);
-      console.log(data)
-  });
-});
-
->>>>>>> 14086fcf56ff419c0960f125cef0b61cbba8fb34

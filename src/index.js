@@ -130,6 +130,21 @@ app.get('/airlines', function(request, response) {
     // console.log("user local email is " + user.local.email);
 })
 
+app.get('/history', function(request, response) {
+    response.sendFile(path.join(__dirname, '/', 'history.html'));
+});
+
+app.get('/historyData', function(request, response) {
+    var req_user = request.user;
+    var past_history;
+    if (req_user) {
+        past_history = req_user.history;
+    }
+    console.log("history data is " + past_history);
+
+    response.json(JSON.stringify(past_history));
+})
+
 app.get('/airlineData', function(request, response) {
     // console.log("get airline data");
     queryStr = 'select airline_id, airline_name, airline_iata from airlines where airline_iata is not null and airline_iata <> "";';
@@ -147,9 +162,7 @@ app.get('/airlineData', function(request, response) {
             history: combined_history
         };
         User.update({ _id: req_user._id }, updated_data, function(err, affected) {
-            // console.log("past history is " + req_user.history);
             console.log("updated history in nosql succeeds");
-            // console.log('affected rows %d', affected);
         })
     }
 
@@ -168,6 +181,19 @@ app.get('/airportData', function(request, response) {
         if (error) throw error;
         response.json(JSON.stringify(results));
     })
+
+    // update nosql history
+    var req_user = request.user;
+    if (req_user) {
+        var past_history = req_user.history;
+        var combined_history = past_history + ";" + queryStr;
+        var updated_data = {
+            history: combined_history
+        };
+        User.update({ _id: req_user._id }, updated_data, function(err, affected) {
+            console.log("updated history in nosql succeeds");
+        })
+    }
 })
 
 
@@ -240,6 +266,19 @@ app.post('/performanceData', jsonParser, function(request, response) {
 
 
     // response.json(JSON.stringify("abc"));
+
+    // update nosql history
+    var req_user = request.user;
+    if (req_user) {
+        var past_history = req_user.history;
+        var combined_history = past_history + ";" + queryStr;
+        var updated_data = {
+            history: combined_history
+        };
+        User.update({ _id: req_user._id }, updated_data, function(err, affected) {
+            console.log("updated history in nosql succeeds");
+        })
+    }
 })
 
 

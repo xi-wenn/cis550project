@@ -150,6 +150,21 @@
               </div>
             </div>
 
+            <h4 class="mb-3">What would you like to search for?</h4>
+            <div class="d-block my-3">
+              <div class="custom-control custom-radio">
+                <input id="performance" name="performance" value="performance" type="radio" ng-model="searchData.type" class="custom-control-input" checked required>
+                <label class="custom-control-label" for="performance">Raw performance data</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input id="avgArrDelay" name="avgArrDelay" value="avgArrDelay" type="radio" ng-model="searchData.type" class="custom-control-input" required>
+                <label class="custom-control-label" for="avgArrDelay">Average arrival delay</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input id="avgDepDelay" name="avgDepDelay" value="avgDepDelay" type="radio" ng-model="searchData.type" class="custom-control-input" required>
+                <label class="custom-control-label" for="avgDepDelay">Average departure delay</label>
+              </div>
+            </div>
 
 <!--             <hr class="mb-4">
             <div class="custom-control custom-checkbox">
@@ -163,7 +178,11 @@
           </form>
         </div>
 
-        <div class="order-md-2" ng-if="performanceData">
+        <div class="order-md-2 text-center mt-3 col-md-12" ng-if="showLoading">
+          <img src="loading.gif" alt="Loading..." style="width:48px;height:48px;">
+        </div>
+
+        <div class="order-md-3" ng-if="performanceData">
           Search Results (Top 1000):
           <table>
             <tr>

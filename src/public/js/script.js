@@ -41,9 +41,14 @@ flightApp.controller('flightsController', function($scope, $http) {
       $scope.showLoading = true;
       $scope.showError = false;
     }
+    var typeUrlMap = {
+      'performance': '/performanceData',
+      'avgArrDelay': '/avgArrDelayData',
+      'avgDepDelay': '/avgDepDelayData'
+    }
     var req = {
      method: 'POST',
-     url: '/performanceData',
+     url: typeUrlMap[$scope.searchData.type],
      data: $scope.searchData
     }
     $http(req).then(function(res) {
@@ -78,7 +83,6 @@ airlineApp.controller('airlineController', function($scope, $http) {
 
 var airportApp = angular.module('Airports', []);
 airportApp.controller('airportController', function($scope, $http) {
-<<<<<<< HEAD
     console.log("js loaded");
     var request = $http.get("/airportData");
     request.success(function(data) {
@@ -86,13 +90,3 @@ airportApp.controller('airportController', function($scope, $http) {
         console.log(data)
     });
 });
-=======
-  console.log("js loaded");
-  var request = $http.get("/airportData");
-  request.success(function(data) {
-      $scope.airportData = JSON.parse(data);
-      console.log(data)
-  });
-});
-
->>>>>>> 14086fcf56ff419c0960f125cef0b61cbba8fb34

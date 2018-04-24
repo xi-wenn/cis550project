@@ -187,17 +187,17 @@ app.post('/performanceData', jsonParser, function(request, response) {
     console.log(request.body)
     queryParams = request.body;
     queryStr = 'select ' +
-        'FL_DATE as flight_date, ' +
-        'airline_name, ' +
-        'FL_NUM as flight_number, ' +
-        'o.airport_iata as origin_airport_iata, ' +
-        'ocity.city as origin_city, ' +
-        'oc.country as origin_country, ' +
-        'd.airport_iata as destination_airport_iata, ' +
-        'dcity.city as destination_city, ' +
-        'dc.country as destination_country, ' +
-        'ARR_DELAY as arrival_delay,' +
-        'DEP_DELAY as departure_delay ' +
+          'FL_DATE as flight_date, ' +
+          'airline_name, ' +
+          'FL_NUM as flight_number, ' +
+          'o.airport_iata as origin_airport_iata, ' +
+          'ocity.city as origin_city, ' +
+          'oc.country as origin_country, ' +
+          'd.airport_iata as destination_airport_iata, ' +
+          'dcity.city as destination_city, ' +
+          'dc.country as destination_country, ' +
+          'ARR_DELAY as arrival_delay,' +
+          'DEP_DELAY as departure_delay ' +
         'from PerformanceRaw p ' +
         'join airlines al on al.airline_id = p.airline_id ' +
         'join airports o on o.airport_id = p.origin_id ' +
@@ -207,8 +207,6 @@ app.post('/performanceData', jsonParser, function(request, response) {
         'left join city dcity on d.airport_city_id = dcity.id ' +
         'left join country dc on d.airport_country_id = dc.id ';
     if (!isEmptyObject(queryParams)) {
-        // queryStr += 'where ';
-        //
         for (var key in queryParams) {
             if (queryParams.hasOwnProperty(key)) {
                 console.log(key + ":" + queryParams[key]);
@@ -220,14 +218,6 @@ app.post('/performanceData', jsonParser, function(request, response) {
                 queryStr += keyColumnMapping[key] + ' = "' + queryParams[key] + '" ';
             }
         }
-        // if (queryParams.airline_name) {
-        //   if (queryStr.indexOf('where') < 0) {
-        //     queryStr += 'where ';
-        //   } else {
-        //     queryStr += 'and ';
-        //   }
-        //   queryStr += 'airline_name = ' + queryParams.airline_name  + ' ';
-        // }
     }
     queryStr += " limit 1000";
 
@@ -240,7 +230,89 @@ app.post('/performanceData', jsonParser, function(request, response) {
 
 
     // response.json(JSON.stringify("abc"));
-})
+});
+
+app.post('/avgArrDelayData', jsonParser, function(request, response) {
+    console.log(request.body)
+    queryParams = request.body;
+    queryStr = 'TODO';
+    if (!isEmptyObject(queryParams)) {
+        for (var key in queryParams) {
+            if (queryParams.hasOwnProperty(key)) {
+                console.log(key + ":" + queryParams[key]);
+                if (queryStr.indexOf('where') < 0) {
+                    queryStr += 'where ';
+                } else {
+                    queryStr += 'and ';
+                }
+                queryStr += keyColumnMapping[key] + ' = "' + queryParams[key] + '" ';
+            }
+        }
+    }
+    queryStr += " limit 1000";
+
+    console.log(queryStr);
+
+    // sql_connection.query(queryStr, function(error, results, fields) {
+    //     if (error) throw error;
+    //     response.json(JSON.stringify(results))
+    // })
+});
+
+app.post('/avgArrDelayData', jsonParser, function(request, response) {
+    console.log(request.body)
+    queryParams = request.body;
+    queryStr = 'TODO avg arrival delay';
+    if (!isEmptyObject(queryParams)) {
+        for (var key in queryParams) {
+            if (queryParams.hasOwnProperty(key)) {
+                console.log(key + ":" + queryParams[key]);
+                if (queryStr.indexOf('where') < 0) {
+                    queryStr += 'where ';
+                } else {
+                    queryStr += 'and ';
+                }
+                queryStr += keyColumnMapping[key] + ' = "' + queryParams[key] + '" ';
+            }
+        }
+    }
+    queryStr += " limit 1000";
+
+    console.log(queryStr);
+
+    // sql_connection.query(queryStr, function(error, results, fields) {
+    //     if (error) throw error;
+    //     response.json(JSON.stringify(results))
+    // })
+});
+
+
+app.post('/avgDepDelayData', jsonParser, function(request, response) {
+    console.log(request.body)
+    queryParams = request.body;
+    queryStr = 'TODO avg departure delay';
+    if (!isEmptyObject(queryParams)) {
+        for (var key in queryParams) {
+            if (queryParams.hasOwnProperty(key)) {
+                console.log(key + ":" + queryParams[key]);
+                if (queryStr.indexOf('where') < 0) {
+                    queryStr += 'where ';
+                } else {
+                    queryStr += 'and ';
+                }
+                queryStr += keyColumnMapping[key] + ' = "' + queryParams[key] + '" ';
+            }
+        }
+    }
+    queryStr += " limit 1000";
+
+    console.log(queryStr);
+
+    // sql_connection.query(queryStr, function(error, results, fields) {
+    //     if (error) throw error;
+    //     response.json(JSON.stringify(results))
+    // })
+});
 
 
 // app.get('/bikes', function(request, response) {

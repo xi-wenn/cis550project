@@ -130,20 +130,20 @@ app.get('/airlines', function(request, response) {
     // console.log("user local email is " + user.local.email);
 })
 
-app.get('/history', function(request, response) {
-    response.sendFile(path.join(__dirname, '/', 'history.html'));
-});
+// app.get('/history', function(request, response) {
+//     response.sendFile(path.join(__dirname, '/', 'history.html'));
+// });
 
-app.get('/historyData', function(request, response) {
-    var req_user = request.user;
-    var past_history;
-    if (req_user) {
-        past_history = req_user.history;
-    }
-    console.log("history data is " + past_history);
+// app.get('/historyData', function(request, response) {
+//     var req_user = request.user;
+//     var past_history;
+//     if (req_user) {
+//         past_history = req_user.history;
+//     }
+//     console.log("history data is " + past_history);
 
-    response.json(JSON.stringify(past_history));
-})
+//     response.json(JSON.stringify(past_history));
+// })
 
 app.get('/airlineData', function(request, response) {
     // console.log("get airline data");

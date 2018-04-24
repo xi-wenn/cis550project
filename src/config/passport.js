@@ -60,7 +60,7 @@ module.exports = function(passport) {
                     // all is well, return user
                     else {
                         req.session.email = user.local.email;
-                        console.log("email is " + req.session.email);
+                        // console.log("email is " + req.session.email);
                         return done(null, user);
                     }
 
@@ -101,6 +101,7 @@ module.exports = function(passport) {
 
                             newUser.local.email = email;
                             newUser.local.password = newUser.generateHash(password);
+                            newUser.history = "";
 
                             newUser.save(function(err) {
                                 if (err)
@@ -126,6 +127,7 @@ module.exports = function(passport) {
                             var user = req.user;
                             user.local.email = email;
                             user.local.password = user.generateHash(password);
+                            newUser.history = "";
                             user.save(function(err) {
                                 if (err)
                                     return done(err);
@@ -137,7 +139,7 @@ module.exports = function(passport) {
                 } else {
                     // user is logged in and already has a local account. Ignore signup. (You should log out before trying to create a new account, user!)
                     req.session.email = user.local.email;
-                    console.log("email is " + req.session.email);
+                    // console.log("email is " + req.session.email);
                     return done(null, req.user);
                 }
 

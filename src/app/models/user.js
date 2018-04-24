@@ -8,26 +8,9 @@ var userSchema = mongoose.Schema({
     local: {
         email: String,
         password: String,
-        history: mongoose.Schema.Types.Mixed
-    }
-    // facebook: {
-    //     id: String,
-    //     token: String,
-    //     name: String,
-    //     email: String
-    // },
-    // twitter: {
-    //     id: String,
-    //     token: String,
-    //     displayName: String,
-    //     username: String
-    // },
-    // google: {
-    //     id: String,
-    //     token: String,
-    //     email: String,
-    //     name: String
-    // }
+
+    },
+    history: mongoose.Schema.Types.Mixed
 
 });
 

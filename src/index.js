@@ -36,6 +36,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 // login routes ======================================================================
 require('./app/routes.js')(app, passport);
+var User = require('./app/models/user.js');
 
 // mysql onfiguration ===============================================================
 var mysql = require('mysql');
@@ -107,7 +108,7 @@ app.get('/', function(request, response) {
 })
 
 function isEmptyObject(obj) {
-  return !Object.keys(obj).length;
+    return !Object.keys(obj).length;
 }
 
 app.get('/index', function(request, response) {
@@ -123,17 +124,20 @@ app.get('/search', function(request, response) {
 // })
 
 app.get('/airlines', function(request, response) {
-  response.sendFile(path.join(__dirname, '/', 'airlines.html'));
+    response.sendFile(path.join(__dirname, '/', 'airlines.html'));
+
+    // var user = request.user;
+    // console.log("user local email is " + user.local.email);
 })
 
 app.get('/airlineData', function(request, response) {
-  // console.log("get airline data");
-  queryStr = 'select airline_id, airline_name, airline_iata from airlines where airline_iata is not null and airline_iata <> "";';
-  connection.query(queryStr, function (error, results, fields) {
-    if (error) throw error;
-    response.json(JSON.stringify(results));
-  })
     // console.log("get airline data");
+    queryStr = 'select airline_id, airline_name, airline_iata from airlines where airline_iata is not null and airline_iata <> "";';
+    connection.query(queryStr, function(error, results, fields) {
+            if (error) throw error;
+            response.json(JSON.stringify(results));
+        })
+        // console.log("get airline data");
     queryStr = 'select airline_id, airline_name, airline_iata from airlines;';
     connection.query(queryStr, function(error, results, fields) {
         if (error) throw error;
@@ -142,94 +146,112 @@ app.get('/airlineData', function(request, response) {
         // console.log(results);
     })
 
+    // update nosql history
+    var req_user = request.user;
+    if (req_user) {
+        var past_history = req_user.history;
+        var combined_history = past_history + ";" + queryStr;
+        var updated_data = {
+            history: combined_history
+        };
+        User.update({ _id: req_user._id }, updated_data, function(err, affected) {
+            // console.log("past history is " + req_user.history);
+            console.log("updated history in nosql succeeds");
+            // console.log('affected rows %d', affected);
+        })
+    }
 
 
 })
 
 
 app.get('/airports', function(request, response) {
-  response.sendFile(path.join(__dirname, '/', 'airports.html'));
+    response.sendFile(path.join(__dirname, '/', 'airports.html'));
 })
 
 app.get('/airportData', function(request, response) {
-  // console.log("get airline data");
-  queryStr = 'select airport_id, airport_name, airport_iata from airports where airport_iata is not null and airport_iata <> "";';
-  connection.query(queryStr, function (error, results, fields) {
-    if (error) throw error;
-    response.json(JSON.stringify(results));
-  })
+    // console.log("get airline data");
+    queryStr = 'select airport_id, airport_name, airport_iata from airports where airport_iata is not null and airport_iata <> "";';
+    connection.query(queryStr, function(error, results, fields) {
+            if (error) throw error;
+            response.json(JSON.stringify(results));
+        })
+        /* update record in nosql */
 })
 
 
 var keyColumnMapping = {
-  'airline_name' : 'airline_name',
-  'flight_number': 'FL_NUM',
-  'flight_date': 'FL_DATE',
-  'origin_airport' : 'o.airport_iata',
-  'destination_airport': 'd.airport_iata',
-  'origin_city': 'ocity.city',
-  'destination_city': 'dcity.city',
-  'origin_country': 'oc.country',
-  'destination_country': 'dc.country'
+    'airline_name': 'airline_name',
+    'flight_number': 'FL_NUM',
+    'flight_date': 'FL_DATE',
+    'origin_airport': 'o.airport_iata',
+    'destination_airport': 'd.airport_iata',
+    'origin_city': 'ocity.city',
+    'destination_city': 'dcity.city',
+    'origin_country': 'oc.country',
+    'destination_country': 'dc.country'
 }
 
 app.post('/performanceData', jsonParser, function(request, response) {
-  console.log(request.body)
-  queryParams = request.body;
-  queryStr = 'select ' +
-              'FL_DATE as flight_date, ' +
-              'airline_name, ' +
-              'FL_NUM as flight_number, ' +
-              'o.airport_iata as origin_airport_iata, ' +
-              'ocity.city as origin_city, ' +
-              'oc.country as origin_country, ' +
-              'd.airport_iata as destination_airport_iata, ' +
-              'dcity.city as destination_city, ' +
-              'dc.country as destination_country, ' +
-              'ARR_DELAY as arrival_delay,' +
-              'DEP_DELAY as departure_delay ' +
-            'from PerformanceRaw p ' +
-            'join airlines al on al.airline_id = p.airline_id ' +
-            'join airports o on o.airport_id = p.origin_id ' +
-            'left join city ocity on o.airport_city_id = ocity.id ' +
-            'left join country oc on o.airport_country_id = oc.id ' +
-            'join airports d on  d.airport_id = p.dest_id ' +
-            'left join city dcity on d.airport_city_id = dcity.id ' +
-            'left join country dc on d.airport_country_id = dc.id ';
-  if (!isEmptyObject(queryParams)) {
-    // queryStr += 'where ';
-    //
-    for (var key in queryParams) {
-      if (queryParams.hasOwnProperty(key)) {
-        console.log(key + ":" + queryParams[key]);
-        if (queryStr.indexOf('where') < 0) {
-          queryStr += 'where ';
-        } else {
-          queryStr += 'and ';
+    console.log(request.body)
+    queryParams = request.body;
+    queryStr = 'select ' +
+        'FL_DATE as flight_date, ' +
+        'airline_name, ' +
+        'FL_NUM as flight_number, ' +
+        'o.airport_iata as origin_airport_iata, ' +
+        'ocity.city as origin_city, ' +
+        'oc.country as origin_country, ' +
+        'd.airport_iata as destination_airport_iata, ' +
+        'dcity.city as destination_city, ' +
+        'dc.country as destination_country, ' +
+        'ARR_DELAY as arrival_delay,' +
+        'DEP_DELAY as departure_delay ' +
+        'from PerformanceRaw p ' +
+        'join airlines al on al.airline_id = p.airline_id ' +
+        'join airports o on o.airport_id = p.origin_id ' +
+        'left join city ocity on o.airport_city_id = ocity.id ' +
+        'left join country oc on o.airport_country_id = oc.id ' +
+        'join airports d on  d.airport_id = p.dest_id ' +
+        'left join city dcity on d.airport_city_id = dcity.id ' +
+        'left join country dc on d.airport_country_id = dc.id ';
+    if (!isEmptyObject(queryParams)) {
+        // queryStr += 'where ';
+        //
+        for (var key in queryParams) {
+            if (queryParams.hasOwnProperty(key)) {
+                console.log(key + ":" + queryParams[key]);
+                if (queryStr.indexOf('where') < 0) {
+                    queryStr += 'where ';
+                } else {
+                    queryStr += 'and ';
+                }
+                queryStr += keyColumnMapping[key] + ' = "' + queryParams[key] + '" ';
+            }
         }
-        queryStr += keyColumnMapping[key] + ' = "' + queryParams[key]  + '" ';
-      }
+        // if (queryParams.airline_name) {
+        //   if (queryStr.indexOf('where') < 0) {
+        //     queryStr += 'where ';
+        //   } else {
+        //     queryStr += 'and ';
+        //   }
+        //   queryStr += 'airline_name = ' + queryParams.airline_name  + ' ';
+        // }
     }
-    // if (queryParams.airline_name) {
-    //   if (queryStr.indexOf('where') < 0) {
-    //     queryStr += 'where ';
-    //   } else {
-    //     queryStr += 'and ';
-    //   }
-    //   queryStr += 'airline_name = ' + queryParams.airline_name  + ' ';
-    // }
-  }
-  queryStr += " limit 1000";
+    queryStr += " limit 1000";
 
-  console.log(queryStr);
+    console.log(queryStr);
 
-  connection.query(queryStr, function (error, results, fields) {
-    if (error) throw error;
-    response.json(JSON.stringify(results))
-  })
+    connection.query(queryStr, function(error, results, fields) {
+        if (error) throw error;
+        response.json(JSON.stringify(results))
+    })
 
 
-  // response.json(JSON.stringify("abc"));
+    // response.json(JSON.stringify("abc"));
+
+    /* update record in nosql */
+
 })
 
 

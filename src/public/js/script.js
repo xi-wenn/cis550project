@@ -79,6 +79,5 @@ airportApp.controller('airportController', function($scope, $http) {
       $scope.airportData = JSON.parse(data);
       console.log(data)
   });
+});
 
-var authApp = angular.module('Auth', []) {
-}

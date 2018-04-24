@@ -95,3 +95,44 @@ update PerformanceRaw
 left join airlines on PerformanceRaw.CARRIER = airlines.airline_id
 set PerformanceRaw.airline_id = airlines.airline_id;
 
+update routes 
+left join airlines on routes.r_airline_code = airlines.airline_iata
+set routes.r_airline_id = airlines.airline_id
+where routes.r_airline_id is null;
+
+update routes 
+left join airports on routes.sr_airport_code = airports.airport_iata
+set routes.sr_airport_id = airports.airport_id
+where routes.sr_airport_id is null;
+
+update routes 
+left join airports on routes.dst_airport_code = airports.airport_iata
+set routes.dst_airport_id = airports.airport_id
+where routes.dst_airport_id is null;
+
+delete from incidents where airline_id is null;
+
+
+
+create table airline_alias as (select distinct airline_name, Alias as alias from airlines where Alias is not null and Alias <> '');
+ALTER TABLE `myFlights`.`airline_alias` 
+CHANGE COLUMN `airline_name` `airline_name` VARCHAR(50) BINARY NOT NULL ,
+ADD PRIMARY KEY (`airline_name`);
+
+
+alter table airlines drop Alias;
+
+
+
+
+select airport_city_id, airport_country_id, timezone from airports where airport_city_id is null;
+create table city_timezone as ( select distinct airport_city_id as id, airport_country_id as country_id, timezone, tz from airports order by id);
+select * from city2;
+alter table city_timezone add primary key (`id`,`country_id`,`timezone`);
+
+
+select * from routes;
+alter table routes  drop column r_airline_code,  drop column sr_airport_code, drop column dst_airport_code;
+
+alter table PerformanceRaw
+drop column ORIGIN, drop column CARRIER, drop column DEST;

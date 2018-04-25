@@ -126,9 +126,9 @@ alter table airlines drop Alias;
 
 
 select airport_city_id, airport_country_id, timezone from airports where airport_city_id is null;
-create table city_timezone as ( select distinct airport_city_id as id, airport_country_id as country_id, timezone, tz from airports order by id);
+create table city_timezone as ( select distinct airport_city_id as id, airport_country_id as country_id, timezone from airports order by id);
 select * from city2;
-alter table city_timezone add primary key (`id`,`country_id`,`timezone`);
+alter table city_timezone add primary key (`id`,`country_id`);
 
 
 select * from routes;

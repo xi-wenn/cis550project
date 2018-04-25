@@ -12,16 +12,81 @@ app.controller('bikeController', function($scope, $http) {
 var flightApp = angular.module('Flights', []);
 flightApp.controller('flightsController', function($scope, $http) {
     console.log("js loaded");
-    // var request = $http.get("/airlineData");
-    // request.success(function(data) {
-    //     $scope.airlineData = JSON.parse(data);
-    //     // console.log(data)
-    // });
-    // request.error(function(data){
-    //     console.log('Error pulling airline data.');
-    // });
+    var request = $http.get("/airlineData");
+    request.success(function(data) {
+        $scope.airlineData = JSON.parse(data);
+        // console.log(data)
+        $('#airline_name').autocomplete({
+          source: $scope.airlineData.map(function (a) {
+            return a.airline_name;
+          })
+        });
+    });
+    request.error(function(data){
+        console.log('Error pulling airline data.');
+    });
+
+    request = $http.get("/airportData");
+    request.success(function(data) {
+        $scope.airportData = JSON.parse(data);
+        console.log(data)
+
+        $('#origin_airport').autocomplete({
+          source: $scope.airportData.map(function (a) {
+            return a.airport_iata;
+          })
+        });
+
+        $('#destination_airport').autocomplete({
+          source: $scope.airportData.map(function (a) {
+            return a.airport_iata;
+          })
+        });
+    });
 
 
+    request = $http.get("/cityData");
+    request.success(function(data) {
+        $scope.cityData = JSON.parse(data);
+        console.log(data)
+
+        $('#origin_city').autocomplete({
+          source: $scope.cityData.map(function (a) {
+            return a.city;
+          })
+        });
+
+        $('#destination_city').autocomplete({
+          source: $scope.cityData.map(function (a) {
+            return a.city;
+          })
+        });
+    });
+
+    request = $http.get("/countryData");
+    request.success(function(data) {
+        $scope.countryData = JSON.parse(data);
+        console.log(data)
+
+        $('#origin_country').autocomplete({
+          source: $scope.countryData.map(function (a) {
+            return a.country;
+          })
+        });
+
+        $('#destination_country').autocomplete({
+          source: $scope.countryData.map(function (a) {
+            return a.countryData;
+          })
+        });
+    });
+    // $.datepicker.formatDate('yy-mm-dd');
+
+    $('#flight_date').datepicker({
+      dateFormat: 'yy-mm-dd',
+      minDate: '2017-01-01',//new Date(2017, 1, 1),
+      maxDate: '2018-01-31'//new Date(2018, 01, 31)
+    });
 
   // $scope.searchName = "";
   // $scope.showFamilyTable = false;

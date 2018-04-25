@@ -138,19 +138,19 @@ app.get('/airlineData', function(request, response) {
         response.json(JSON.stringify(results));
 
         // update nosql history
-        var req_user = request.user;
-        if (req_user) {
-            var past_history = req_user.history;
-            var combined_history = past_history + ";" + queryStr;
-            var updated_data = {
-                history: combined_history
-            };
-            User.update({ _id: req_user._id }, updated_data, function(err, affected) {
-                // console.log("past history is " + req_user.history);
-                console.log("updated history in nosql succeeds");
-                // console.log('affected rows %d', affected);
-            })
-        }
+        // var req_user = request.user;
+        // if (req_user) {
+        //     var past_history = req_user.history;
+        //     var combined_history = past_history + ";" + queryStr;
+        //     var updated_data = {
+        //         history: combined_history
+        //     };
+        //     User.update({ _id: req_user._id }, updated_data, function(err, affected) {
+        //         // console.log("past history is " + req_user.history);
+        //         console.log("updated history in nosql succeeds");
+        //         // console.log('affected rows %d', affected);
+        //     })
+        // }
     })
 })
 
@@ -166,22 +166,41 @@ app.get('/airportData', function(request, response) {
         if (error) throw error;
         response.json(JSON.stringify(results));
 
-        // update nosql history
-        var req_user = request.user;
-        if (req_user) {
-            var past_history = req_user.history;
-            var combined_history = past_history + ";" + queryStr;
-            var updated_data = {
-                history: combined_history
-            };
-            User.update({ _id: req_user._id }, updated_data, function(err, affected) {
-                // console.log("past history is " + req_user.history);
-                console.log("updated history in nosql succeeds");
-                // console.log('affected rows %d', affected);
-            })
-        }
+        // // update nosql history
+        // var req_user = request.user;
+        // if (req_user) {
+        //     var past_history = req_user.history;
+        //     var combined_history = past_history + ";" + queryStr;
+        //     var updated_data = {
+        //         history: combined_history
+        //     };
+        //     User.update({ _id: req_user._id }, updated_data, function(err, affected) {
+        //         // console.log("past history is " + req_user.history);
+        //         console.log("updated history in nosql succeeds");
+        //         // console.log('affected rows %d', affected);
+        //     })
+        // }
     })
 })
+
+app.get('/cityData', function(request, response) {
+    // console.log("get airline data");
+    queryStr = 'select city from city;';
+    sql_connection.query(queryStr, function(error, results, fields) {
+        if (error) throw error;
+        response.json(JSON.stringify(results));
+    })
+})
+
+app.get('/countryData', function(request, response) {
+    // console.log("get airline data");
+    queryStr = 'select country from country;';
+    sql_connection.query(queryStr, function(error, results, fields) {
+        if (error) throw error;
+        response.json(JSON.stringify(results));
+    })
+})
+
 
 
 var keyColumnMapping = {

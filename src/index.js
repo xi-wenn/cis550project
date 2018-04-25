@@ -183,11 +183,28 @@ var keyColumnMapping = {
     'destination_country': 'dc.country'
 }
 
-app.post('/performanceData', jsonParser, function(request, response) {
-    console.log(request.body)
-    queryParams = request.body;
-    queryStr = 'select ' +
-          'FL_DATE as flight_date, ' +
+// var baseFilterQuery = 'select ' +
+//           'FL_DATE as flight_date, ' +
+//           'airline_name, ' +
+//           'FL_NUM as flight_number, ' +
+//           'o.airport_iata as origin_airport_iata, ' +
+//           'ocity.city as origin_city, ' +
+//           'oc.country as origin_country, ' +
+//           'd.airport_iata as destination_airport_iata, ' +
+//           'dcity.city as destination_city, ' +
+//           'dc.country as destination_country, ' +
+//           'ARR_DELAY as arrival_delay,' +
+//           'DEP_DELAY as departure_delay ' +
+//         'from PerformanceRaw p ' +
+//         'join airlines al on al.airline_id = p.airline_id ' +
+//         'join airports o on o.airport_id = p.origin_id ' +
+//         'left join city ocity on o.airport_city_id = ocity.id ' +
+//         'left join country oc on o.airport_country_id = oc.id ' +
+//         'join airports d on  d.airport_id = p.dest_id ' +
+//         'left join city dcity on d.airport_city_id = dcity.id ' +
+//         'left join country dc on d.airport_country_id = dc.id ';
+
+var performanceSelectFields = 'FL_DATE as flight_date, ' +
           'airline_name, ' +
           'FL_NUM as flight_number, ' +
           'o.airport_iata as origin_airport_iata, ' +
@@ -197,8 +214,9 @@ app.post('/performanceData', jsonParser, function(request, response) {
           'dcity.city as destination_city, ' +
           'dc.country as destination_country, ' +
           'ARR_DELAY as arrival_delay,' +
-          'DEP_DELAY as departure_delay ' +
-        'from PerformanceRaw p ' +
+          'DEP_DELAY as departure_delay ';
+
+var baseFilterQueryJoins = 'from PerformanceRawBackup p ' +
         'join airlines al on al.airline_id = p.airline_id ' +
         'join airports o on o.airport_id = p.origin_id ' +
         'left join city ocity on o.airport_city_id = ocity.id ' +
@@ -206,16 +224,23 @@ app.post('/performanceData', jsonParser, function(request, response) {
         'join airports d on  d.airport_id = p.dest_id ' +
         'left join city dcity on d.airport_city_id = dcity.id ' +
         'left join country dc on d.airport_country_id = dc.id ';
+
+app.post('/performanceData', jsonParser, function(request, response) {
+    console.log(request.body)
+    queryParams = request.body;
+    queryStr = 'select ' + performanceSelectFields + baseFilterQueryJoins;
     if (!isEmptyObject(queryParams)) {
         for (var key in queryParams) {
             if (queryParams.hasOwnProperty(key)) {
                 console.log(key + ":" + queryParams[key]);
-                if (queryStr.indexOf('where') < 0) {
-                    queryStr += 'where ';
-                } else {
-                    queryStr += 'and ';
+                if (queryParams[key].length > 0) {
+                  if (queryStr.indexOf('where') < 0) {
+                      queryStr += 'where ';
+                  } else {
+                      queryStr += 'and ';
+                  }
+                  queryStr += keyColumnMapping[key] + ' = "' + queryParams[key] + '" ';
                 }
-                queryStr += keyColumnMapping[key] + ' = "' + queryParams[key] + '" ';
             }
         }
     }
@@ -235,121 +260,59 @@ app.post('/performanceData', jsonParser, function(request, response) {
 app.post('/avgArrDelayData', jsonParser, function(request, response) {
     console.log(request.body)
     queryParams = request.body;
-    queryStr = 'TODO';
-    if (!isEmptyObject(queryParams)) {
-        for (var key in queryParams) {
-            if (queryParams.hasOwnProperty(key)) {
-                console.log(key + ":" + queryParams[key]);
-                if (queryStr.indexOf('where') < 0) {
-                    queryStr += 'where ';
-                } else {
-                    queryStr += 'and ';
-                }
-                queryStr += keyColumnMapping[key] + ' = "' + queryParams[key] + '" ';
-            }
-        }
-    }
-    queryStr += " limit 1000";
+    queryStr = 'select avg(ARR_DELAY) as average_delay ' + baseFilterQueryJoins;
+
+    filterKey = Object.keys(queryParams)[0];
+
+    queryStr += 'where ' + keyColumnMapping[filterKey] + ' = "' + queryParams[filterKey] + '" group by ' + keyColumnMapping[filterKey];
 
     console.log(queryStr);
 
-    // sql_connection.query(queryStr, function(error, results, fields) {
-    //     if (error) throw error;
-    //     response.json(JSON.stringify(results))
-    // })
+
+
+    sql_connection.query(queryStr, function(error, results, fields) {
+        if (error) throw error;
+        response.json(JSON.stringify(results))
+    })
 });
-
-app.post('/avgArrDelayData', jsonParser, function(request, response) {
-    console.log(request.body)
-    queryParams = request.body;
-    queryStr = 'TODO avg arrival delay';
-    if (!isEmptyObject(queryParams)) {
-        for (var key in queryParams) {
-            if (queryParams.hasOwnProperty(key)) {
-                console.log(key + ":" + queryParams[key]);
-                if (queryStr.indexOf('where') < 0) {
-                    queryStr += 'where ';
-                } else {
-                    queryStr += 'and ';
-                }
-                queryStr += keyColumnMapping[key] + ' = "' + queryParams[key] + '" ';
-            }
-        }
-    }
-    queryStr += " limit 1000";
-
-    console.log(queryStr);
-
-    // sql_connection.query(queryStr, function(error, results, fields) {
-    //     if (error) throw error;
-    //     response.json(JSON.stringify(results))
-    // })
-});
-
 
 app.post('/avgDepDelayData', jsonParser, function(request, response) {
     console.log(request.body)
     queryParams = request.body;
-    queryStr = 'TODO avg departure delay';
-    if (!isEmptyObject(queryParams)) {
-        for (var key in queryParams) {
-            if (queryParams.hasOwnProperty(key)) {
-                console.log(key + ":" + queryParams[key]);
-                if (queryStr.indexOf('where') < 0) {
-                    queryStr += 'where ';
-                } else {
-                    queryStr += 'and ';
-                }
-                queryStr += keyColumnMapping[key] + ' = "' + queryParams[key] + '" ';
-            }
-        }
-    }
-    queryStr += " limit 1000";
+    queryStr = 'select avg(DEP_DELAY) as average_delay ' + baseFilterQueryJoins;
+
+    filterKey = Object.keys(queryParams)[0];
+
+    queryStr += 'where ' + keyColumnMapping[filterKey] + ' = "' + queryParams[filterKey] + '" group by ' + keyColumnMapping[filterKey];
 
     console.log(queryStr);
 
-    // sql_connection.query(queryStr, function(error, results, fields) {
-    //     if (error) throw error;
-    //     response.json(JSON.stringify(results))
-    // })
+    sql_connection.query(queryStr, function(error, results, fields) {
+        if (error) throw error;
+        response.json(JSON.stringify(results))
+    })
 });
 
 
-// app.get('/bikes', function(request, response) {
-//   response.sendFile(path.join(__dirname, '/', 'bikes.html'));
-// })
+app.post('/incidentData', jsonParser, function(request, response) {
+    console.log(request.body)
+    queryAirline = request.body.airline_name;
+    // queryStr = '';
 
-// app.get('/friendships', function(request, response) {
-//   response.sendFile(path.join(__dirname, '/', 'friendships.html'));
-// })
+    queryStr = 'select i.date as incident_date, a.airline_name, i.FlightNum as flight_number '  +
+              'from incidents i ' +
+              'join airlines a on i.airline_id = a.airline_id ' +
+              'where airline_name = "' + queryAirline + '";'
 
-// app.get('/friendshipdata', function(req, res) {
-//   queryStr = 'select p.name as name, IFNULL(fc.friendCount, 0) as friendCount' +
-//            ' from Person p' +
-//            ' left join (' +
-//            '  select login, count(friend) as friendCount ' +
-//            '  from Friends ' +
-//            '  group by login' +
-//            ' ) fc on p.login = fc.login;';
-//   connection.query(queryStr, function (error, results, fields) {
-//     if (error) throw error;
-//     res.json(JSON.stringify(results))
-//   })
-// })
+    console.log(queryStr);
 
-// app.post('/familydata', jsonParser, function(req, res) {
-//   reqName = req.body.data;
-//   console.log(req.body.data);
-//   queryStr = 'select p2.login, p2.name, f.role, p2.sex, p2.relationshipStatus, p2.birthyear' +
-//             ' from Person p' +
-//             ' inner join Family f on f.login = p.login' +
-//             ' left join Person p2 on f.member = p2.login' +
-//             ' where p.name = "' + reqName + '"';
-//   connection.query(queryStr, function (error, results, fields) {
-//     if (error) throw error;
-//     res.json(JSON.stringify(results))
-//   })
-// })
+    sql_connection.query(queryStr, function(error, results, fields) {
+        if (error) throw error;
+        response.json(JSON.stringify(results))
+    });
+});
+
+
 
 app.get('/script.js', function(request, response) {
     response.sendFile(path.join(__dirname, '/', 'script.js'));

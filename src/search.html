@@ -158,11 +158,15 @@
               </div>
               <div class="custom-control custom-radio">
                 <input id="avgArrDelay" name="avgArrDelay" value="avgArrDelay" type="radio" ng-model="searchData.type" class="custom-control-input" required>
-                <label class="custom-control-label" for="avgArrDelay">Average arrival delay</label>
+                <label class="custom-control-label" for="avgArrDelay">Average arrival delay (support only one filter)</label>
               </div>
               <div class="custom-control custom-radio">
                 <input id="avgDepDelay" name="avgDepDelay" value="avgDepDelay" type="radio" ng-model="searchData.type" class="custom-control-input" required>
-                <label class="custom-control-label" for="avgDepDelay">Average departure delay</label>
+                <label class="custom-control-label" for="avgDepDelay">Average departure delay (support only one filter)</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input id="incident" name="incident" value="incident" type="radio" ng-model="searchData.type" class="custom-control-input" required>
+                <label class="custom-control-label" for="incident">Past incidents (will only search on airline filter)</label>
               </div>
             </div>
 
@@ -183,7 +187,7 @@
         </div>
 
         <div class="order-md-3" ng-if="performanceData">
-          Search Results (Top 1000):
+          Search Results (showing top 1000; try refining your filters if desired result is not shown):
           <table>
             <tr>
               <th>Flight Date</th>
@@ -215,7 +219,56 @@
         </div>
 
 
+        <div class="order-md-3" ng-if="avgArrDelayData">
+          Search results:
+          <table>
+            <tr>
+              <th>Average Delay</th>
+            </tr>
+            <tr ng-repeat="x in avgArrDelayData">
+              <td>{{ x.average_delay }}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="order-md-3" ng-if="avgDepDelayData">
+          Search results:
+          <table>
+            <tr>
+              <th>Average Delay</th>
+            </tr>
+            <tr ng-repeat="x in avgDepDelayData">
+              <td>{{ x.average_delay }}</td>
+            </tr>
+          </table>
+        </div>
+
+
+        <div class="order-md-3" ng-if="incidentData">
+          Search Results:
+          <table>
+            <tr>
+              <th>Flight Date</th>
+              <th>Flight Number</th>
+              <th>Airline Name</th>
+            </tr>
+            <tr ng-repeat="x in incidentData">
+              <td>{{ x.incident_date }}</td>
+              <td>{{ x.flight_number }}</td>
+              <td>{{ x.airline_name }}</td>
+            </tr>
+          </table>
+        </div>
+
+
       </div>
+
+
+
+
+
+      </div>
+
 
 
 

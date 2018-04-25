@@ -29,11 +29,21 @@ flightApp.controller('flightsController', function($scope, $http) {
   $scope.search = function (){
     console.log('clicked');
     console.log($scope.searchData);
-    if ($.isEmptyObject($scope.searchData)) {
+
+    $scope.performanceData = null;
+    $scope.avgArrDelayData = null;
+    $scope.avgDepDelayData = null;
+    $scope.incidentData = null;
+
+    var searchType = $scope.searchData.type;
+    var data = Object.assign({}, $scope.searchData);
+    delete data.type;
+
+    if ($.isEmptyObject(data)) {
       $scope.errorMsg = "Must add at least one filter!";
       $scope.showError = true;
       return;
-    } else if (!$scope.searchData.type) {
+    } else if (!searchType) {
       $scope.errorMsg = "Must select search type!";
       $scope.showError = true;
     } else {
@@ -44,24 +54,19 @@ flightApp.controller('flightsController', function($scope, $http) {
     var typeUrlMap = {
       'performance': '/performanceData',
       'avgArrDelay': '/avgArrDelayData',
-      'avgDepDelay': '/avgDepDelayData'
+      'avgDepDelay': '/avgDepDelayData',
+      'incident': '/incidentData'
     }
     var req = {
      method: 'POST',
-     url: typeUrlMap[$scope.searchData.type],
-     data: $scope.searchData
+     url: typeUrlMap[searchType],
+     data: data
     }
+    console.log(req);
     $http(req).then(function(res) {
-      $scope.performanceData = JSON.parse(res.data);
-      // if ($.isEmptyObject($scope.familydata)) {
-      //   $scope.showNoFamilyMessage = true;
-      //   $scope.showFamilyTable = false;
-      // } else {
-      //   $scope.showNoFamilyMessage = false;
-      //   $scope.showFamilyTable = true;
-      // }
-      // console.log($scope.familydata);
+      $scope[searchType + 'Data'] = JSON.parse(res.data);
       $scope.showLoading = false;
+      console.log($scope);
     });
   };
 });

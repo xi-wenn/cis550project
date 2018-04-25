@@ -39,6 +39,17 @@ flightApp.controller('flightsController', function($scope, $http) {
     var data = Object.assign({}, $scope.searchData);
     delete data.type;
 
+    for (var key in data) {
+        if (data.hasOwnProperty(key)) {
+            // console.log(key + ":" + queryParams[key]);
+            if (data[key].length == 0) {
+              delete data[key];
+              // queryStr += keyColumnMapping[key] + ' = "' + queryParams[key] + '" ';
+            }
+        }
+    }
+
+
     if ($.isEmptyObject(data)) {
       $scope.errorMsg = "Must add at least one filter!";
       $scope.showError = true;

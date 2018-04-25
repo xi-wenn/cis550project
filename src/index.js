@@ -136,24 +136,22 @@ app.get('/airlineData', function(request, response) {
     sql_connection.query(queryStr, function(error, results, fields) {
         if (error) throw error;
         response.json(JSON.stringify(results));
+
+        // update nosql history
+        var req_user = request.user;
+        if (req_user) {
+            var past_history = req_user.history;
+            var combined_history = past_history + ";" + queryStr;
+            var updated_data = {
+                history: combined_history
+            };
+            User.update({ _id: req_user._id }, updated_data, function(err, affected) {
+                // console.log("past history is " + req_user.history);
+                console.log("updated history in nosql succeeds");
+                // console.log('affected rows %d', affected);
+            })
+        }
     })
-
-    // update nosql history
-    var req_user = request.user;
-    if (req_user) {
-        var past_history = req_user.history;
-        var combined_history = past_history + ";" + queryStr;
-        var updated_data = {
-            history: combined_history
-        };
-        User.update({ _id: req_user._id }, updated_data, function(err, affected) {
-            // console.log("past history is " + req_user.history);
-            console.log("updated history in nosql succeeds");
-            // console.log('affected rows %d', affected);
-        })
-    }
-
-
 })
 
 
@@ -167,6 +165,21 @@ app.get('/airportData', function(request, response) {
     sql_connection.query(queryStr, function(error, results, fields) {
         if (error) throw error;
         response.json(JSON.stringify(results));
+
+        // update nosql history
+        var req_user = request.user;
+        if (req_user) {
+            var past_history = req_user.history;
+            var combined_history = past_history + ";" + queryStr;
+            var updated_data = {
+                history: combined_history
+            };
+            User.update({ _id: req_user._id }, updated_data, function(err, affected) {
+                // console.log("past history is " + req_user.history);
+                console.log("updated history in nosql succeeds");
+                // console.log('affected rows %d', affected);
+            })
+        }
     })
 })
 
@@ -251,6 +264,21 @@ app.post('/performanceData', jsonParser, function(request, response) {
     sql_connection.query(queryStr, function(error, results, fields) {
         if (error) throw error;
         response.json(JSON.stringify(results))
+
+        // update nosql history
+        var req_user = request.user;
+        if (req_user) {
+            var past_history = req_user.history;
+            var combined_history = past_history + ";" + queryStr;
+            var updated_data = {
+                history: combined_history
+            };
+            User.update({ _id: req_user._id }, updated_data, function(err, affected) {
+                // console.log("past history is " + req_user.history);
+                console.log("updated history in nosql succeeds");
+                // console.log('affected rows %d', affected);
+            })
+        }
     })
 
 
@@ -273,6 +301,21 @@ app.post('/avgArrDelayData', jsonParser, function(request, response) {
     sql_connection.query(queryStr, function(error, results, fields) {
         if (error) throw error;
         response.json(JSON.stringify(results))
+
+        // update nosql history
+        var req_user = request.user;
+        if (req_user) {
+            var past_history = req_user.history;
+            var combined_history = past_history + ";" + queryStr;
+            var updated_data = {
+                history: combined_history
+            };
+            User.update({ _id: req_user._id }, updated_data, function(err, affected) {
+                // console.log("past history is " + req_user.history);
+                console.log("updated history in nosql succeeds");
+                // console.log('affected rows %d', affected);
+            })
+        }
     })
 });
 
@@ -290,6 +333,21 @@ app.post('/avgDepDelayData', jsonParser, function(request, response) {
     sql_connection.query(queryStr, function(error, results, fields) {
         if (error) throw error;
         response.json(JSON.stringify(results))
+
+        // update nosql history
+        var req_user = request.user;
+        if (req_user) {
+            var past_history = req_user.history;
+            var combined_history = past_history + ";" + queryStr;
+            var updated_data = {
+                history: combined_history
+            };
+            User.update({ _id: req_user._id }, updated_data, function(err, affected) {
+                // console.log("past history is " + req_user.history);
+                console.log("updated history in nosql succeeds");
+                // console.log('affected rows %d', affected);
+            })
+        }
     })
 });
 
@@ -309,6 +367,21 @@ app.post('/incidentData', jsonParser, function(request, response) {
     sql_connection.query(queryStr, function(error, results, fields) {
         if (error) throw error;
         response.json(JSON.stringify(results))
+
+        // update nosql history
+        var req_user = request.user;
+        if (req_user) {
+            var past_history = req_user.history;
+            var combined_history = past_history + ";" + queryStr;
+            var updated_data = {
+                history: combined_history
+            };
+            User.update({ _id: req_user._id }, updated_data, function(err, affected) {
+                // console.log("past history is " + req_user.history);
+                console.log("updated history in nosql succeeds");
+                // console.log('affected rows %d', affected);
+            })
+        }
     });
 });
 

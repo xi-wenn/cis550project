@@ -29,7 +29,7 @@ flightApp.controller('flightsController', function($scope, $http) {
     request = $http.get("/airportData");
     request.success(function(data) {
         $scope.airportData = JSON.parse(data);
-        console.log(data)
+        // console.log(data)
 
         $('#origin_airport').autocomplete({
           source: $scope.airportData.map(function (a) {
@@ -48,7 +48,7 @@ flightApp.controller('flightsController', function($scope, $http) {
     request = $http.get("/cityData");
     request.success(function(data) {
         $scope.cityData = JSON.parse(data);
-        console.log(data)
+        // console.log(data)
 
         $('#origin_city').autocomplete({
           source: $scope.cityData.map(function (a) {
@@ -66,7 +66,7 @@ flightApp.controller('flightsController', function($scope, $http) {
     request = $http.get("/countryData");
     request.success(function(data) {
         $scope.countryData = JSON.parse(data);
-        console.log(data)
+        // console.log(data)
 
         $('#origin_country').autocomplete({
           source: $scope.countryData.map(function (a) {
